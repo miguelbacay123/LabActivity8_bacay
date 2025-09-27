@@ -10,8 +10,10 @@ class BlogController extends Controller
 {
     public function index()
     {
-        $blogs = Blog::latest()->get();
-        return view('blogs.index', compact('blogs'));
+$blogs = Blog::all();
+return view('blogs.index', compact('blogs'));
+        // $blogs = Blog::orderBy('created_at', 'desc')->get();
+        // return view('blogs.index', compact('blogs'));
     }
 
     public function create()
@@ -27,10 +29,15 @@ class BlogController extends Controller
             'image' => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
         ]);
 
-        if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('uploads', 'public');
-            $validated['image'] = $path;
-        }
+    if ($request->hasFile('image')) {
+    $image = $request->file('image');
+    $imageName = uniqid('img_', true) . '.' . $image->getClientOriginalExtension();
+    $image->move(public_path('uploads'), $imageName);
+    $imagePath = 'uploads/' . $imageName;
+    } else {
+    $imagePath = null;
+    }
+
 
         Blog::create($validated);
 

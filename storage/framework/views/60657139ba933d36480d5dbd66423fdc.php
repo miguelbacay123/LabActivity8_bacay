@@ -24,4 +24,4 @@
 >
     <span x-text="copied ? 'Copied to clipboard' : 'Copy as Markdown'"></span>
 </div>
-<?php /**PATH C:\xampp\htdocs\blogs\Laravel-Image-main\vendor\laravel\framework\src\Illuminate\Foundation\Providers/../resources/exceptions/renderer/components/copy-button.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\xampp\htdocs\laravel-image-blogsystem\vendor\laravel\framework\src\Illuminate\Foundation\Providers/../resources/exceptions/renderer/components/copy-button.blade.php ENDPATH**/ ?>

@@ -7,14 +7,12 @@ use App\Models\Post;
 
 class PostController extends Controller
 {
-    // Show all posts
-    public function index()
-    {
-        $posts = Post::orderBy('created_at', 'desc')->get();
-        return view('posts.index', compact('posts'));
-    }
 
-    // Store a new post
+public function index()
+{
+    $posts = Post::all();
+    return view('posts.index', compact('posts'));
+}
     public function store(Request $request)
     {
         $validated = $request->validate([

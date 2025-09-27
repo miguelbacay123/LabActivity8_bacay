@@ -57,4 +57,4 @@
     </script>
 </body>
 </html>
-<?php /**PATH C:\xampp\htdocs\blogs\Laravel-Image-main\vendor\laravel\framework\src\Illuminate\Foundation\Providers/../resources/exceptions/renderer/components/layout.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\xampp\htdocs\laravel-image-blogsystem\vendor\laravel\framework\src\Illuminate\Foundation\Providers/../resources/exceptions/renderer/components/layout.blade.php ENDPATH**/ ?>

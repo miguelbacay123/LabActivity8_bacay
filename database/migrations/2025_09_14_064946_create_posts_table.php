@@ -9,7 +9,8 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    
+public function up()
 {
     Schema::create('posts', function (Blueprint $table) {
         $table->id();
@@ -20,6 +21,7 @@ return new class extends Migration
         $table->timestamps();
     });
 }
+
 
     public function down(): void
     {
