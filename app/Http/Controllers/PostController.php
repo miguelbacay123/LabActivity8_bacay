@@ -4,15 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
+    public function index()
+    {
+        $posts = Post::latest()->get();
+        return view('posts.index', compact('posts'));
+    }
 
-public function index()
-{
-    $posts = Post::all();
-    return view('posts.index', compact('posts'));
-}
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -32,18 +34,17 @@ public function index()
             'category' => $validated['category'] ?? null,
             'content' => $validated['content'],
             'image_path' => $imagePath,
+            'user_id' => Auth::id(),
         ]);
 
         return redirect()->route('posts.index')->with('success', 'Post created successfully.');
     }
 
-    // Show the form for editing a post
     public function edit(Post $post)
     {
         return view('posts.edit', compact('post'));
     }
 
-    // Update the post
     public function update(Request $request, Post $post)
     {
         $validated = $request->validate([
@@ -54,6 +55,10 @@ public function index()
         ]);
 
         if ($request->hasFile('image')) {
+            // Delete old image if exists
+            if ($post->image_path) {
+                Storage::delete($post->image_path);
+            }
             $imagePath = $request->file('image')->store('uploads', 'public');
             $post->image_path = $imagePath;
         }
@@ -66,9 +71,12 @@ public function index()
         return redirect()->route('posts.index')->with('success', 'Post updated successfully.');
     }
 
-    // Delete the post
     public function destroy(Post $post)
     {
+        // Delete image file if exists
+        if ($post->image_path) {
+            Storage::delete($post->image_path);
+        }
         $post->delete();
         return redirect()->route('posts.index')->with('success', 'Post deleted successfully.');
     }

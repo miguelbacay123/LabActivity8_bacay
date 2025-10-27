@@ -70,24 +70,24 @@
     <div class="form-container">
         <h1>Register</h1>
 
-        @if ($errors->any())
+        <?php if($errors->any()): ?>
             <div class="error-list">
                 <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
+                    <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <li><?php echo e($error); ?></li>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </ul>
             </div>
-        @endif
+        <?php endif; ?>
 
-        <form method="POST" action="{{ route('register.submit') }}">
-            @csrf
+        <form method="POST" action="<?php echo e(route('register.submit')); ?>">
+            <?php echo csrf_field(); ?>
 
             <label for="name">Name</label>
-            <input type="text" name="name" id="name" value="{{ old('name') }}" required>
+            <input type="text" name="name" id="name" value="<?php echo e(old('name')); ?>" required>
 
             <label for="email">Email</label>
-            <input type="email" name="email" id="email" value="{{ old('email') }}" required>
+            <input type="email" name="email" id="email" value="<?php echo e(old('email')); ?>" required>
 
             <label for="password">Password</label>
             <input type="password" name="password" id="password" required>
@@ -97,3 +97,4 @@
     </div>
 </body>
 </html>
+<?php /**PATH C:\xampp\htdocs\LabActivity8_Bacay\resources\views/register.blade.php ENDPATH**/ ?>

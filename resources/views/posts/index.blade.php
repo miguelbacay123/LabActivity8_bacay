@@ -4,6 +4,16 @@
 
 @section('content')
     <div class="container">
+        <!-- Logout Button -->
+        <div style="text-align: left; margin-bottom: 20px;">
+            <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+                @csrf
+                <button type="submit" style="background: #e91e63; color: white; border: none; padding: 10px 16px; border-radius: 8px; cursor: pointer;">
+                    Logout
+                </button>
+            </form>
+        </div>
+
         <h1>Create a New Post</h1>
 
         {{-- Laravel Validation Errors --}}
@@ -61,7 +71,7 @@
                 </div>
                 <p>{!! nl2br(e($post->content)) !!}</p>
 
-                @if ($post->image_path)
+                   @if ($post->image_path)
                     <img src="{{ asset('storage/' . $post->image_path) }}" alt="Post image" style="max-width: 300px; margin-top: 10px;">
                 @endif
 
